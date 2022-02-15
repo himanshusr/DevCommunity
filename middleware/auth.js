@@ -7,7 +7,6 @@ module.exports = async function (req, res, next) {
   //const token = req.header('x-auth-token');
   try {
     const token = req.header('Authorization').replace('Bearer ', '');
-
     //check if no token
     if (!token) {
       return res.status(401).json({
@@ -29,8 +28,8 @@ module.exports = async function (req, res, next) {
 
     next();
   } catch (err) {
-    res.status(401).json({
-      msg: 'Token is not valid',
+    return res.status(401).json({
+      msg: 'Please authenticate first',
     });
   }
 };
