@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alert from '../layout/Alert';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const Login = () => {
 
   return (
     <section className='container'>
+      <Alert />
       <h1 className='large text-primary'>Sign In</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Sign Into Your Account
