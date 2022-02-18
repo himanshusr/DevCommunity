@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Alert from '../layout/Alert';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../action/auth';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,10 +22,14 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    console.log('Success');
+    login(email, password);
+    // console.log('Success');
   };
 
+  //Redirect if Logged in
+  if (isAuthenticated) {
+    return <Navigate to='/dashboard' />;
+  }
   return (
     <section className='container'>
       <Alert />
@@ -60,5 +67,14 @@ const Login = () => {
     </section>
   );
 };
+//Proptypes are used for typechecking of the props as JS is a loosely typed language
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
 
-export default Login;
+const mapStateToProps = (state) => {
+  return { isAuthenticated: state.auth.isAuthenticated };
+};
+
+export default connect(mapStateToProps, { login })(Login);
