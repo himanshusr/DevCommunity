@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 //@route   GET api/profile/me
 //@desc    Get current users profile
@@ -164,28 +165,48 @@ router.get('/user/:user_id', async (req, res) => {
     return res.status(500).send('Server Error');
   }
 });
+// @route    DELETE api/profile
+// @desc     Delete profile, user & posts
+// @access   Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    // Remove user posts
+    // Remove profile
+    // Remove user
+    await Promise.all([
+      Post.deleteMany({ user: req.user.id }),
+      Profile.findOneAndRemove({ user: req.user.id }),
+      User.findOneAndRemove({ _id: req.user.id }),
+    ]);
+
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 //@route   DELETE api/profile/user/:user_id
 //@desc    Delete profile, user,
 //@access  Private
 
-router.delete('/user/:user_id', auth, async (req, res) => {
-  try {
-    //@todo - Remove tasks
-    //Remove profile
-    await Profile.findOneAndRemove({ user: req.user.id });
-    //Remove user
-    await User.findOneAndRemove({ _id: req.user.id });
+// router.delete('/user/:user_id', auth, async (req, res) => {
+//   try {
+//     //@todo - Remove tasks
+//     //Remove profile
+//     await Profile.findOneAndRemove({ user: req.user.id });
+//     //Remove user
+//     await User.findOneAndRemove({ _id: req.user.id });
 
-    return res.json({ msg: 'User Deleted' });
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === 'ObjectId')
-      return res.status(400).json({ msg: 'Profile not found' });
+//     return res.json({ msg: 'User Deleted' });
+//   } catch (err) {
+//     console.error(err.message);
+//     if (err.kind === 'ObjectId')
+//       return res.status(400).json({ msg: 'Profile not found' });
 
-    return res.status(500).send('Server Error');
-  }
-});
+//     return res.status(500).send('Server Error');
+//   }
+// });
 //@route   PUT api/profile/experience
 //@desc    Add profile experience,
 //@access  Private
@@ -215,9 +236,9 @@ router.put(
       location,
       from: new Date(from.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')),
       to:
-        to !== undefined
-          ? new Date(to.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3'))
-          : null,
+        to === undefined || to === ''
+          ? null
+          : new Date(to.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')),
       current,
       description,
     };
@@ -296,9 +317,9 @@ router.put(
       fieldofstudy,
       from: new Date(from.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')),
       to:
-        to !== undefined
-          ? new Date(to.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3'))
-          : null,
+        to === undefined || to === ''
+          ? null
+          : new Date(to.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')),
       current,
       description,
     };

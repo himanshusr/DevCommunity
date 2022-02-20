@@ -4,9 +4,15 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
+import CreateProfile from './components/profile-form/CreateProfile';
+import EditProfile from './components/profile-form/EditProfile';
+import AddExperience from './components/profile-form/AddExperience';
+import AddEducation from './components/profile-form/AddEducation';
 
 //Redux
-//Provider combines react and redux by surroounding entire app with provider
+//Provider combines react and redux by surrounding entire app with provider
 import { Provider } from 'react-redux';
 //Pass in the store to Provider
 import store from './store';
@@ -28,10 +34,31 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Navbar />
+
         <Routes>
-          <Route exact path='/' element={<Landing />} />
-          <Route exact path='/register' element={<Register />}></Route>
-          <Route exact path='/login' element={<Login />}></Route>
+          <Route path='/' element={<Landing />} />
+          <Route path='register' element={<Register />}></Route>
+          <Route path='login' element={<Login />}></Route>
+          <Route
+            path='dashboard'
+            element={<PrivateRoute component={Dashboard} />}
+          />
+          <Route
+            path='create-profile'
+            element={<PrivateRoute component={CreateProfile} />}
+          />
+          <Route
+            path='edit-profile'
+            element={<PrivateRoute component={EditProfile} />}
+          />
+          <Route
+            path='add-experience'
+            element={<PrivateRoute component={AddExperience} />}
+          />
+          <Route
+            path='add-education'
+            element={<PrivateRoute component={AddEducation} />}
+          />
         </Routes>
       </Router>
     </Provider>

@@ -13,9 +13,9 @@ const bcrypt = require('bcryptjs');
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+    return res.json(user);
   } catch (err) {
-    res.status(500).send('Server Error');
+    return res.status(500).send('Server Error');
   }
 });
 

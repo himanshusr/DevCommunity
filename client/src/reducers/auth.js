@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  ACCOUNT_DELETED,
 } from '../action/types';
 
 const intialState = {
@@ -30,7 +31,7 @@ const auth = function (state = intialState, action) {
       localStorage.setItem('token', payload.token);
       return {
         ...state,
-        ...payload,
+        token: payload.token,
         isAuthenticated: true,
         loading: false,
       };
@@ -38,12 +39,14 @@ const auth = function (state = intialState, action) {
     case AUTH_ERR:
     case LOGIN_FAIL:
     case LOGOUT:
+    case ACCOUNT_DELETED:
       localStorage.removeItem('token');
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: null,
       };
 
     default:
