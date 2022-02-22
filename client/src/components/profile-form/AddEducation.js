@@ -82,7 +82,6 @@ const AddEducation = ({ addEducation }) => {
             type='date'
             name='to'
             value={educationData.to}
-            onChange={(e) => onChange(e)}
             disabled={toDateDisabled ? 'disabled' : ''}
             onChange={(e) => onChange(e)}
           />

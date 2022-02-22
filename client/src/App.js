@@ -10,6 +10,10 @@ import CreateProfile from './components/profile-form/CreateProfile';
 import EditProfile from './components/profile-form/EditProfile';
 import AddExperience from './components/profile-form/AddExperience';
 import AddEducation from './components/profile-form/AddEducation';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 //Redux
 //Provider combines react and redux by surrounding entire app with provider
@@ -39,6 +43,8 @@ const App = () => {
           <Route path='/' element={<Landing />} />
           <Route path='register' element={<Register />}></Route>
           <Route path='login' element={<Login />}></Route>
+          <Route path='profiles' element={<Profiles />}></Route>
+          <Route path='profile/:id' element={<Profile />}></Route>
           <Route
             path='dashboard'
             element={<PrivateRoute component={Dashboard} />}
@@ -59,6 +65,8 @@ const App = () => {
             path='add-education'
             element={<PrivateRoute component={AddEducation} />}
           />
+          <Route path='posts' element={<PrivateRoute component={Posts} />} />
+          <Route path='posts/:id' element={<PrivateRoute component={Post} />} />
         </Routes>
       </Router>
     </Provider>
