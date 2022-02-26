@@ -26,11 +26,11 @@ https://singhrao-dev-connect.herokuapp.com/
 
 To run this project, you will need to add the following environment variables to your config/default.json file
 
-`"mongoURI": 'hfjdshfkhkadjghkaghkaghkaghdkghk'`
+`"mongoURI": "hfjdshfkhkadjghkaghkaghkaghdkghk"`
 
-`jwtSecret: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
+`"jwtSecret": "hfjdshfkhkadjghkaghkaghkaghdkghk"`
 
-`githubToken: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
+`"githubToken": "hfjdshfkhkadjghkaghkaghkaghdkghk"`
 
 
 ## Installation
