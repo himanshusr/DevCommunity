@@ -1,0 +1,5 @@
+{
+   "mongoURI": "<Paste-your-mongoDB-connection-string-here>",
+   "jwtSecret":"<Your-JWT-Secret>",
+   "githubToken":"<Your-Github-Token-for-accessing-github-repos-in-the-profile-section>"
+}
