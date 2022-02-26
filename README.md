@@ -50,9 +50,10 @@ Install Client dependencies
   
 ```
 
-Run
+cd back to root and Run
 
 ```bash
+  cd ../
   npm run dev
   
 ```
