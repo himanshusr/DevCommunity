@@ -24,15 +24,11 @@ https://singhrao-dev-connect.herokuapp.com/
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your config/default.json file
 
 `"mongoURI": 'hfjdshfkhkadjghkaghkaghkaghdkghk'`
 
 `jwtSecret: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
-
-`githubApiClientSecret: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
-
-`githubApiClientId: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
 
 `githubToken: 'fjdkhkjdghkjgshkgjhskgjhkhgdkshgkd'`
 
